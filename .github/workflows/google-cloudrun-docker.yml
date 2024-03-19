@@ -50,6 +50,7 @@ on:
 
 env:
   PROJECT_ID: brave-projects
+  GAR_NAME: brave-projects
   GAR_LOCATION: us-central1
   JOB: canadian-weather-ai
   REGION: us-central1
@@ -96,8 +97,8 @@ jobs:
 
       - name: Build and Push Container
         run: |-
-          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.JOB }}:${{ github.sha }}" ./
-          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.JOB }}:${{ github.sha }}"
+          docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.JOB }}:${{ github.sha }}" ./
+          docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.JOB }}:${{ github.sha }}"
 
       # END - Docker auth and build
 
