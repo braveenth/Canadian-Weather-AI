@@ -1,0 +1,46 @@
+apiVersion: run.googleapis.com/v1
+kind: Job
+metadata:
+  annotations:
+    client.knative.dev/user-image: us-central1-docker.pkg.dev/brave-projects/brave-projects/canadian-weather-ai:latest
+    run.googleapis.com/launch-stage: BETA
+  labels:
+    cloud.googleapis.com/location: us-central1
+  name: canadian-weather-ai
+  namespace: '814577087058'
+spec:
+  template:
+    metadata:
+      annotations:
+        client.knative.dev/user-image: us-central1-docker.pkg.dev/brave-projects/brave-projects/canadian-weather-ai:latest
+        run.googleapis.com/client-name: cloud-console
+        run.googleapis.com/execution-environment: gen2
+    spec:
+      taskCount: 1
+      template:
+        spec:
+          containers:
+          - env:
+            - name: OPENAI_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: '1'
+                  name: OPENAI_API_KEY_1
+            image: us-central1-docker.pkg.dev/brave-projects/brave-projects/canadian-weather-ai:latest
+            volumeMounts:
+            - mountPath: /content
+              name: bucket
+            resources:
+              limits:
+                cpu: 1000m
+                memory: 512Mi
+          volumes:
+          - name: bucket
+            csi:
+              driver: gcsfuse.run.googleapis.com
+              readOnly: False
+              volumeAttributes:
+                bucketName: can-weather-ai
+          maxRetries: 3
+          serviceAccountName: 814577087058-compute@developer.gserviceaccount.com
+          timeoutSeconds: '600'
