@@ -27,6 +27,9 @@ print(image_url)
 !pip install openai
 from openai import OpenAI
 
+#Config
+# temperature = 1
+
 try:
     # Attempt to import the google.colab module to see if the program is running in Colab.
     from google.colab import userdata
@@ -39,6 +42,9 @@ except ImportError:
     import os
     print("Running outside of Google Colab")
     client = OpenAI(api_key=(os.environ.get('OPENAI_API_KEY')))
+
+    # if 'TEMPERATURE' in os.environ:
+    #     temperature = os.environ.get('TEMPERATURE')
 
 canadianMetric = {}
 
@@ -70,7 +76,8 @@ response = client.chat.completions.create(
     }
   ],
   max_tokens=600,
-  temperature=0.7,
+  #temperature=0.7,
+  temperature=0.9,
   top_p=1,
   frequency_penalty=0,
   presence_penalty=0
@@ -152,9 +159,9 @@ combined = specific_part_quieter.overlay(audio_weatherperson, position=0)
 
 # Export the result
 count = 0
-while os.path.exists(f"/content/voice/ai-canadian-jetstream-{date}_{count}.wav"):
+while os.path.exists(f"/content/voice/ai-canadian-jetstream-{date}_{count}.mp3"):
     count += 1
-combined.export(f"/content/voice/ai-canadian-jetstream-{date}_{count}.mp3", format="mp3")
+combined.export(f"/content/voice/ai-canadian-jetstream-{date}_{count}.mp3", format="wav")
 
 # # Initialize an empty audio segment
 # combined = AudioSegment.empty()

@@ -16,6 +16,8 @@ RUN pip install -r requirements.txt
 #RUN alias /gcs-bucket /root/HealthData
 COPY canadian_weather_ai.py /usr/src/app
 COPY start.sh /usr/src/app
+RUN mkdir -p "/content/assets"
+RUN curl -o "/content/assets/WeatherNetwork.mp3" "https://storage.googleapis.com/can-weather-ai/assets/WeatherNetwork.mp3"
 
 RUN sed -i '/^!pip/d' /usr/src/app/canadian_weather_ai.py
 RUN sed -i '/^display/d' /usr/src/app/canadian_weather_ai.py

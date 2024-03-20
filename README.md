@@ -12,3 +12,7 @@ I thought it would be a very cool project to build something that allows for us 
 
 ## Collaboration
 - Message me and/or submit a Pull Request
+
+## Notes
+- Use GitHub Actions for deploying Cloud Run Jobs using this link: https://github.com/google-github-actions/deploy-cloudrun?tab=readme-ov-file#custom-metadata-yaml
+- You can use a custom metadata .yaml file to deploy a Cloud Run Job
