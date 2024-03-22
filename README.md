@@ -10,6 +10,8 @@ I thought it would be a very cool project to build something that allows for us 
 | 2024-03-21 | https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-21_0.mp3 | https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-21_0.txt
 | 2024-03-22 | https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-22_5.mp3 | https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-22_5.txt
 | 2024-03-22 | https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-22_6.mp3 | https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-22_6.txt
+| 2024-03-22 | https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-22_8.mp3 | https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-22_16.txt
+
 
 ## Architecture
 - Cloud Run Jobs
