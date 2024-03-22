@@ -18,6 +18,10 @@ I thought it would be a very cool project to build something that allows for us 
 - GCS for Storage
 - OpenAI for LLMs and TTS
 
+## Input Example
+![alt text](https://weather.gc.ca/data/jet_stream/tempmapwx_e.gif)
+- Thank you Environment Canada
+
 ## Collaboration
 - Message me and/or submit a Pull Request
 
