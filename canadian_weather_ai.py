@@ -18,33 +18,33 @@ Cloud Run Jobs
 
 image_url = "https://weather.gc.ca/data/jet_stream/tempmapwx_e.gif"
 print(image_url)
-# !curl -o case_image.png {image_url}
+!curl -o case_image.png {image_url}
 
 # from IPython.display import Image
 # Image("/content/jet_stream.png")
 # Image(url=image_url)
 
-!pip install openai
-from openai import OpenAI
-
-#Config
-# temperature = 1
+import os
 
 try:
     # Attempt to import the google.colab module to see if the program is running in Colab.
     from google.colab import userdata
     print("Running on Google Colab")
+    !pip install openai
+    !pip install pydub
+    from openai import OpenAI
     client = OpenAI(api_key=userdata.get('OPENAI_API_KEY'))
+    !mkdir -p /content/text
+    !mkdir -p /content/voice
+    !mkdir -p /content/assets
+    !curl -o "/content/assets/WeatherNetwork.mp3" "https://storage.googleapis.com/can-weather-ai/assets/WeatherNetwork.mp3"
 
 except ImportError:
     # The ImportError exception will be raised if the google.colab module is not found,
     # indicating that the program is not running inside Google Colab.
-    import os
     print("Running outside of Google Colab")
+    from openai import OpenAI
     client = OpenAI(api_key=(os.environ.get('OPENAI_API_KEY')))
-
-    # if 'TEMPERATURE' in os.environ:
-    #     temperature = os.environ.get('TEMPERATURE')
 
 canadianMetric = {}
 
@@ -76,23 +76,23 @@ response = client.chat.completions.create(
     }
   ],
   max_tokens=600,
-  #temperature=0.7,
-  temperature=0.9,
+  temperature=0.7,
   top_p=1,
   frequency_penalty=0,
   presence_penalty=0
 )
 
-#print(response.choices[0])
+print(response.choices[0])
 
 weatherScript = response.choices[0].message.content
-#print(weatherScript)
+print(weatherScript)
 
 # Save the weatherScript as a file
 from datetime import datetime
 
 date = datetime.now().strftime("%Y-%m-%d")
 count = 0
+
 while os.path.exists(f"/content/text/ai-canadian-jetstream-{date}_{count}.txt"):
     count += 1
 file = open(f"/content/text/ai-canadian-jetstream-{date}_{count}.txt", "w")
@@ -120,7 +120,11 @@ audioResponse = audioClient.audio.speech.create(
     input=weatherScript,
 )
 
-filename = greeting = f"weatherperson-output-{date}.mp3"
+filename = f"weatherperson-output-{date}.mp3"
+
+audioResponse.stream_to_file(filename)
+
+from pydub import AudioSegment
 
 # Export the result
 weatherPersonFileCount = 0
@@ -130,16 +134,42 @@ while os.path.exists(f"/content/weatherperson-output-{date}_{weatherPersonFileCo
 weatherpersonFile = f"/content/{filename}-{count}"
 audioResponse.stream_to_file(f"/content/weatherperson-output-{date}_{weatherPersonFileCount}.wav")
 
-!pip install pydub
-
-from pydub import AudioSegment
-
-# files = [f"output_{i}.mp3" for i in range(0, upper_limit)]
-
-
 # Obtain Audio Files
 audio_bg_music = AudioSegment.from_file("/content/assets/WeatherNetwork.mp3", format="mp3")
 audio_weatherperson = AudioSegment.from_file(f"/content/weatherperson-output-{date}_{weatherPersonFileCount}.wav", format="mp3")
+
+# BG Music Segments from https://www.youtube.com/watch?v=6E2uzYAGPQU
+#####################################################################
+# 01. Morning Report (1998) Conclusions 0:00. #
+# 02. Autumn (1999) Flying V.1 1:59 #
+# 03. Holidays (2000) Xmas Spirit 3:29
+# 04. Biding My Time 4:59
+# 05. Winter (2002-'03) Life to the Full 7:12
+# 06. Spring-Autumn (2003) Healthy Outlook 8:42
+# 07. Winter (2003-04) Embrace Life 10:43
+# 08. Primary Theme (2004-05) Lazing on the Slopes 13:16
+# 09. Theme (2005-06) Windstar 15:17
+# 10. Theme (2006-10) 17:17
+# 11. Theme (2010-201?) Song Contest Winner 19:37
+# 12. Holiday Version of Theme 11 (2011) 21:58
+# 13. 25th Anniversary (2004-05 Secondary Theme) 25:02
+
+segments = [0] * 12
+segments[0] = [0, 119000, 5]
+segments[1] = [119000, 209000, 7]
+segments[2] = [209000, 299000, 5]
+segments[3] = [299000, 432000, 7]
+segments[4] = [432000, 522000, 5]
+segments[5] = [522000, 643000, 5]
+segments[6] = [643000, 796000, 5]
+segments[7] = [796000, 917000, 7]
+segments[8] = [917000, 1037000, 5]
+segments[9] = [1037000, 1177000, 5]
+segments[10] = [1177000, 1318000, 5]
+segments[11] = [1318000, 1502000, 5]
+
+# Custom timing adjustments based on listening observations
+segments[8][0] = segments[8][0] + 8000
 
 # Define start and end times in milliseconds
 # Start at 17:22
@@ -147,11 +177,19 @@ audio_weatherperson = AudioSegment.from_file(f"/content/weatherperson-output-{da
 start_time = 1042000  # Start at 10 seconds
 end_time = start_time + 120000
 
+# Use a Random number between 0 an 11 to obtain the segment number
+import random
+segment_number = random.randint(0, 11)
+
+# Using Segments Here
+start_time = segments[segment_number][0] + 1000
+end_time = segments[segment_number][1]
+
 # Slice the audio segment to the desired part
 specific_part = audio_bg_music[start_time:end_time]
 
 # Lower the volume by 10 dB
-specific_part_quieter = specific_part - 5
+specific_part_quieter = specific_part - segments[segment_number][2]
 
 # Overlay the audio files
 # Here, overlay_audio will start at 0 milliseconds into base_audio
@@ -161,18 +199,4 @@ combined = specific_part_quieter.overlay(audio_weatherperson, position=0)
 count = 0
 while os.path.exists(f"/content/voice/ai-canadian-jetstream-{date}_{count}.mp3"):
     count += 1
-combined.export(f"/content/voice/ai-canadian-jetstream-{date}_{count}.mp3", format="wav")
-
-# # Initialize an empty audio segment
-# combined = AudioSegment.empty()
-
-# overlay = vln_audio_1.overlay(vla_audio_2)
-# file_handle = overlay.export("output2.wav", format="wav")
-
-# # Loop through the list and concatenate each file
-# for file in files:
-#     current_audio = AudioSegment.from_mp3(file)
-#     combined += current_audio
-
-# # Export the combined audio
-# combined.export("/content/caseStory.mp3", format="wav")
+combined.export(f"/content/voice/ai-canadian-jetstream-{date}_{count}.mp3", format="mp3")
