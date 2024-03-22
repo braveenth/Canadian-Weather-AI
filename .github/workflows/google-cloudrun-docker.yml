@@ -99,8 +99,9 @@ jobs:
         run: |-
           pip install nbconvert
           rm ./canadian_weather_ai.py
-          jupyter nbconvert --to script ./Canadian_Weather_AI.ipynb
-          mv ./Canadian_Weather_AI.py canadian_weather_ai.py
+          jupyter nbconvert --to script ./Canadian_Weather_AI.ipynb --output ./canadian_weather_ai.py
+          mv ./canadian_weather_ai.py.txt ./canadian_weather_ai.py
+          ls
           docker build -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.JOB }}:${{ github.sha }}" -t "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.JOB }}:latest" ./
           docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.JOB }}:latest"
           #docker push "${{ env.GAR_LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.GAR_NAME }}/${{ env.JOB }}:${{ github.sha }}"
