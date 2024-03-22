@@ -22,6 +22,7 @@ COPY start.sh /usr/src/app
 RUN sed -i '/^[ \t]*!pip/d' /usr/src/app/canadian_weather_ai.py
 RUN sed -i '/^[ \t]*!curl/d' /usr/src/app/canadian_weather_ai.py
 RUN sed -i '/^[ \t]*!display/d' /usr/src/app/canadian_weather_ai.py
+RUN sed -i '/^[ \t]*!mkdir/d' /usr/src/app/canadian_weather_ai.py
 RUN sed -i '/^[[:space:]]*from IPython.display/d' /usr/src/app/canadian_weather_ai.py
 RUN sed -i '/^[ \t]*Image/d' /usr/src/app/canadian_weather_ai.py
 
