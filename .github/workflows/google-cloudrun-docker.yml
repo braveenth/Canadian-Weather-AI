@@ -103,18 +103,18 @@ jobs:
 
       # END - Docker auth and build
 
-      # - name: Deploy to Cloud Run
-      #   id: deploy
-      #   uses: google-github-actions/deploy-cloudrun@v2
-      #   with:
-      #     metadata: ./cloud-run-job.yaml
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v2'
+      - name: Deploy to Cloud Run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
         with:
-          version: '>= 468.0.0'
+          metadata: ./cloud-run-job.yaml
+      # - name: 'Set up Cloud SDK'
+      #   uses: 'google-github-actions/setup-gcloud@v2'
+      #   with:
+      #     version: '>= 468.0.0'
   
-      - name: 'Use gcloud CLI'
-        run: 'gcloud run jobs replace ./cloud-run-job.yaml'
+      # - name: 'Use gcloud CLI'
+      #   run: 'gcloud run jobs replace ./cloud-run-job.yaml'
         
       # If required, use the Cloud Run url output in later steps
       - name: Show Output
