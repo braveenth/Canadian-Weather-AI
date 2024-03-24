@@ -12,12 +12,15 @@ I thought it would be a very cool project to build something that allows for us 
 | 2024-03-22 | https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-22_6.mp3 | https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-22_6.txt
 | 2024-03-22 | https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-22_8.mp3 | https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-22_16.txt
 
-
 ## Architecture
 - Cloud Run Jobs
 - Cloud Scheduler
 - GCS for Storage
 - OpenAI for LLMs and TTS
+
+## Input Example
+![alt text](https://weather.gc.ca/data/jet_stream/tempmapwx_e.gif)
+- Thank you Environment Canada
 
 ## Collaboration
 - Message me and/or submit a Pull Request
@@ -25,3 +28,4 @@ I thought it would be a very cool project to build something that allows for us 
 ## Notes
 - Use GitHub Actions for deploying Cloud Run Jobs using this link: https://github.com/google-github-actions/deploy-cloudrun?tab=readme-ov-file#custom-metadata-yaml
 - You can use a custom metadata .yaml file to deploy a Cloud Run Job
+- This is for you, Dad (1956-2022)
