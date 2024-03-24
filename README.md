@@ -13,42 +13,6 @@ I thought it would be a very cool project to build something that allows for us 
     <a href="https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-24_0.txt" id="latest-text-link">Today's AI Generated Forecast (Text)</a>
 </div>
 
-<script>
-(function() {
-    // Function to get the current date in Toronto time zone
-    function getTorontoDate() {
-        const torontoTimezone = 'America/Toronto';
-        const now = new Date().toLocaleString("en-CA", {timeZone: torontoTimezone});
-        const torontoDate = new Date(now);
-
-        // Formatting the date in YYYY-M-D format
-        const year = torontoDate.getFullYear();
-        // getMonth() returns month from 0-11. Adding 1 to get 1-12
-        const month = torontoDate.getMonth() + 1;
-        const day = torontoDate.getDate();
-
-        return `${year}-${month}-${day}`;
-    }
-
-    // Update the link with the current date in Toronto
-    function updateAudioLink() {
-        const dateStr = getTorontoDate();
-        const link = document.getElementById('latest-audio-link');
-        link.href = `https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-${dateStr}_0.mp3`;
-    }
-
-    function updateTextLink() {
-        const dateStr = getTorontoDate();
-        const link = document.getElementById('latest-text-link');
-        link.href = `https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-${dateStr}_0.txt`;
-    }
-
-    // Call the update function on script load
-    updateAudioLink();
-    updateTextLink();
-})();
-</script>
-
 ## Output
 | Date | Audio Link | Text Link |
 | --- | --- | --- |
