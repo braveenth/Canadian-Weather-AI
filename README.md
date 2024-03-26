@@ -6,11 +6,7 @@ I thought it would be a very cool project to build something that allows for us 
 
 ## Today's Weather Forecast
 <div id="latest-link-container-1">
-    <a href="https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-24_0.mp3" id="latest-audio-link">Today's AI Generated Forecast (Audio)</a>
-</div>
-
-<div id="latest-link-container-2">
-    <a href="https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-24_0.txt" id="latest-text-link">Today's AI Generated Forecast (Text)</a>
+    <a href="https://storage.googleapis.com/can-weather-ai/index.html" id="latest-audio-link">Today's AI Generated Forecast (Audio & Text)</a>
 </div>
 
 ## Output
