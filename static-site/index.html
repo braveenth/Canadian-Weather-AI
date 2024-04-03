@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Theme Dynamic Links</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: #a2d5f2; /* Light blue background */
+            background: linear-gradient(to right, #4e98f9, #6b6b6b68); /* Gradient for more dynamic look */
+            color: white; /* White text color */
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+        }
+        .container {
+            text-align: center; /* Center text for small devices */
+        }
+        .btn {
+            margin: 5px; /* Spacing between buttons */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Today's Weather Links</h2>
+        <h3 id="date0">Date</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <a href="https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-24_0.mp3" id="audio-link-0" class="btn btn-primary btn-lg">Audio</a>
+                <a href="https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-24_0.txt" id="text-link-0" class="btn btn-secondary btn-lg">Text</a>
+            </div>
+        </div>
+        <h5 id="date1">Date</h5>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <a href="https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-24_0.mp3" id="audio-link-1" class="btn btn-primary btn-lg">Audio</a>
+                <a href="https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-24_0.txt" id="text-link-1" class="btn btn-secondary btn-lg">Text</a>
+            </div>
+        </div>
+        <h5 id="date2">Date</h5>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <a href="https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-24_0.mp3" id="audio-link-2" class="btn btn-primary btn-lg">Audio</a>
+                <a href="https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-24_0.txt" id="text-link-2" class="btn btn-secondary btn-lg">Text</a>
+            </div>
+        </div>
+        <h5 id="date3">Date</h5>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <a href="https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-24_0.mp3" id="audio-link-3" class="btn btn-primary btn-lg">Audio</a>
+                <a href="https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-24_0.txt" id="text-link-3" class="btn btn-secondary btn-lg">Text</a>
+            </div>
+        </div>
+        <h5 id="date4">Date</h5>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <a href="https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-2024-03-24_0.mp3" id="audio-link-4" class="btn btn-primary btn-lg">Audio</a>
+                <a href="https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-2024-03-24_0.txt" id="text-link-4" class="btn btn-secondary btn-lg">Text</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        (function() {
+            function getTorontoDate(daysBack) {
+                const torontoTimezone = 'America/Toronto';
+                const now = new Date().toLocaleString("en-US", {timeZone: torontoTimezone});
+                const torontoDate = new Date(now);
+                torontoDate.setDate(torontoDate.getDate() - daysBack);
+
+                const year = torontoDate.getFullYear();
+                let month = torontoDate.getMonth() + 1;
+                const day = torontoDate.getDate();
+
+                month = month < 10 ? `0${month}` : month;
+                day = day < 10 ? `0${day}` : day;
+
+                return `${year}-${month}-${day}`;
+            }
+
+            function updateLinks() {
+                const dateStr0 = getTorontoDate(0);
+                const dateStr1 = getTorontoDate(1);
+                const dateStr2 = getTorontoDate(2);
+                const dateStr3 = getTorontoDate(3);
+                const dateStr4 = getTorontoDate(4);
+
+                document.getElementById('date0').textContent = `${dateStr0}`;
+                document.getElementById('date1').textContent = `${dateStr1}`;
+                document.getElementById('date2').textContent = `${dateStr2}`;
+                document.getElementById('date3').textContent = `${dateStr3}`;
+                document.getElementById('date4').textContent = `${dateStr4}`;
+
+                document.getElementById('audio-link-0').href = `https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-${dateStr0}_0.mp3`;
+                document.getElementById('text-link-0').href = `https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-${dateStr0}_0.txt`;
+
+                document.getElementById('audio-link-1').href = `https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-${dateStr1}_0.mp3`;
+                document.getElementById('text-link-1').href = `https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-${dateStr1}_0.txt`;
+
+                document.getElementById('audio-link-2').href = `https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-${dateStr2}_0.mp3`;
+                document.getElementById('text-link-2').href = `https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-${dateStr2}_0.txt`;
+
+                document.getElementById('audio-link-3').href = `https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-${dateStr3}_0.mp3`;
+                document.getElementById('text-link-3').href = `https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-${dateStr3}_0.txt`;
+
+                document.getElementById('audio-link-4').href = `https://storage.googleapis.com/can-weather-ai/voice/ai-canadian-jetstream-${dateStr4}_0.mp3`;
+                document.getElementById('text-link-4').href = `https://storage.googleapis.com/can-weather-ai/text/ai-canadian-jetstream-${dateStr4}_0.txt`;
+            }
+
+            updateLinks();
+        })();
+    </script>
+</body>
+</html>
