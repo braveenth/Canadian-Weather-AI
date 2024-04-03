@@ -25,7 +25,12 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: '1'
-                  name: OPENAI_API_KEY_1
+                  name: OPENAI_KEY_1
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: '1'
+                  name: ANTHROPIC_KEY_1
             image: us-central1-docker.pkg.dev/brave-projects/brave-projects/canadian-weather-ai:latest
             volumeMounts:
             - mountPath: /content
