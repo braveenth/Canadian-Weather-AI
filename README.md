@@ -4,6 +4,11 @@ Environment Canada's Jet Stream map to a spoken weather forecast using multi-mod
 
 I thought it would be a very cool project to build something that allows for us to experience the intersection of nostalgia from the 2000s with the advances we have made recently. I added a “Canadian-emphasis" to it, to see how an LLM perceives and mimics Canadian linguistics and semantics. This was done through iterative Prompt Engineering, and it was quite the experience!
 
+## Today's Weather Forecast
+<div id="latest-link-container-1">
+    <a href="https://storage.googleapis.com/can-weather-ai/index.html" id="latest-audio-link">Today's AI Generated Forecast (Audio & Text)</a>
+</div>
+
 ## Output
 | Date | Audio Link | Text Link |
 | --- | --- | --- |
