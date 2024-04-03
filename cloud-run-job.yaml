@@ -25,7 +25,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: '1'
-                  name: OPENAI_KEY_1
+                  name: OPENAI_API_KEY_1
             - name: ANTHROPIC_API_KEY
               valueFrom:
                 secretKeyRef:
