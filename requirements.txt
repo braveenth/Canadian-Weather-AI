@@ -2,3 +2,4 @@ pydub
 openai
 pytz
 anthropic
+google-generativeai
