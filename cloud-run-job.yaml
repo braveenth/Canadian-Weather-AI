@@ -36,6 +36,11 @@ spec:
                 secretKeyRef:
                   key: '1'
                   name: GOOGLE_AI_STUDIO_KEY_1
+            - name: GROQ_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: '1'
+                  name: GROQ_CLOUD_KEY_1
             image: us-central1-docker.pkg.dev/brave-projects/brave-projects/canadian-weather-ai:latest
             volumeMounts:
             - mountPath: /content
