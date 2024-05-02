@@ -3,3 +3,4 @@ openai
 pytz
 anthropic
 google-generativeai
+groq
