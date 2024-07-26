@@ -25,6 +25,7 @@ RUN sed -i '/^[ \t]*!display/d' /usr/src/app/canadian_weather_ai.py
 RUN sed -i '/^[ \t]*!mkdir/d' /usr/src/app/canadian_weather_ai.py
 RUN sed -i '/^[[:space:]]*from IPython.display/d' /usr/src/app/canadian_weather_ai.py
 RUN sed -i '/^[ \t]*Image/d' /usr/src/app/canadian_weather_ai.py
+RUN sed -i '/^[ \t]*display\(/d' /usr/src/app/canadian_weather_ai.py
 
 RUN chmod +x "/usr/src/app/start.sh"
 # Run script.py when the container launches
